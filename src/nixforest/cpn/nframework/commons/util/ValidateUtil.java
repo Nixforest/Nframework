@@ -1,14 +1,10 @@
 /**
- * Copyright (C) Nixforest System Development Co., Ltd. 2016. All rights reserved.
+  * Copyright (C) Nixforest System Development Co., Ltd. 2016. All rights reserved.
  */
 package nixforest.cpn.nframework.commons.util;
 
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
-
-import jp.co.nekonet.voyage.commons.exception.GenericRuntimeException;
-import jp.co.nekonet.voyage.commons.util.AssertUtil;
-import jp.co.nekonet.voyage.commons.util.StringUtil;
 
 /**
  * @author Nixforest

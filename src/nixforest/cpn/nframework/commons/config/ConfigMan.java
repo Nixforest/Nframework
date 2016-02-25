@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Properties;
 
+import nixforest.cpn.nframework.commons.exception.BaseConfigException;
 import nixforest.cpn.nframework.commons.util.StringUtil;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -44,7 +45,7 @@ public final class ConfigMan {
                 String value = (String) prop.get(keys[i]);
                 builder.append("  [" + keys[i] + "] = [" + value + "]" + StringUtil.LF);
             }
-            LogManager.infoLog(ConfigManager.class, builder.toString());
+            //TODO-LogManager.infoLog(ConfigManager.class, builder.toString());
         }
     }
 	private static Properties readProperties(String fileName) {
@@ -55,20 +56,20 @@ public final class ConfigMan {
             AssetManager as = sContext.getResources().getAssets();
             in = as.open(fileName);
             if (in == null) {
-                throw new BaseConfigurationException(fileName + " does not exist.");
+                throw new BaseConfigException(fileName + " does not exist.");
             }
             prop.load(in);
             // 内容をログ出力
             logContent(fileName, prop);
 
         } catch (IOException e) {
-            throw new BaseConfigurationException("Reading of " + fileName + " went wrong.", e);
+            throw new BaseConfigException("Reading of " + fileName + " went wrong.", e);
         } finally {
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    LogManager.fatalLog(ConfigManager.class, "close() failed.", e);
+                	//TODO-LogManager.fatalLog(ConfigManager.class, "close() failed.", e);
                 }
             }
         }
@@ -78,7 +79,7 @@ public final class ConfigMan {
         sSystemProp = readProperties(SYSTEM_PROP_FILE_NAME);
         sApplicationProp = readProperties(APPLICATION_PROP_FILE_NAME);
         // ViewManagerを更新
-        ViewManager.initialize();
+        //TODO-ViewManager.initialize();
     }
 	public static void init(Context context) {
         sContext = context;
