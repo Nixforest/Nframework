@@ -14,7 +14,7 @@ public class SysException extends GenericException {
 	/**
 	 * Serial version UID.
 	 */
-	private static final long serialVersionUID = -681203602505037913L;
+	private static final long serialVersionUID = 999463009682851552L;
 
 	/**
 	 * Default constructor.
