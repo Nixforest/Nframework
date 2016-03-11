@@ -6,6 +6,8 @@ package nixforest.cpn.nframework.commons.config;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import nixforest.cpn.nframework.commons.exception.BaseConfigException;
@@ -59,7 +61,6 @@ public final class ConfigMan {
                 throw new BaseConfigException(fileName + " does not exist.");
             }
             prop.load(in);
-            // 内容をログ出力
             logContent(fileName, prop);
 
         } catch (IOException e) {
@@ -78,11 +79,71 @@ public final class ConfigMan {
 	public static void reload() {
         sSystemProp = readProperties(SYSTEM_PROP_FILE_NAME);
         sApplicationProp = readProperties(APPLICATION_PROP_FILE_NAME);
-        // ViewManagerを更新
+        // ViewManager
         //TODO-ViewManager.initialize();
     }
 	public static void init(Context context) {
         sContext = context;
         reload();
     }
+    public static void setSystemConfigProperty(String key, String value) {
+        if (sContext == null) {
+            throw new BaseConfigException("This class is uninitialized yet.");
+        }
+        //TODO-if (SystemConfig.isDebugMode()) {
+            synchronized (sSystemProp) {
+                sSystemProp.setProperty(key,  value);
+            }
+        //}
+    }
+    public static void setApplicationConfigProperty(String key, String value) {
+        if (sContext == null) {
+            throw new BaseConfigException("This class is uninitialized yet.");
+        }
+        //TODO-if (SystemConfig.isDebugMode()) {
+            synchronized (sApplicationProp) {
+                sApplicationProp.setProperty(key,  value);
+            }
+        //}
+    }
+    static Properties getSystemProperties() {
+        return sSystemProp;
+    }
+    static Properties getApplicationProperties() {
+        return sApplicationProp;
+    }
+    //TODO-static Map<String, LogConfig> getLogConfigMap() {
+//        String[] keys =
+//                (String[]) sApplicationProp.keySet().toArray(new String[sApplicationProp.size()]);
+//        Map<String, LogConfig> result = new HashMap<String, LogConfig>();
+//        if (keys != null && keys.length > 0) {
+//            Arrays.sort(keys);
+//            Map<String, String> keyMap = new HashMap<String, String>();
+//            Map<String, Map<String, String>> logMaps = new HashMap<String, Map<String, String>>();
+//            for (int i = 0; i < keys.length; i++) {
+//                if (keys[i].startsWith(ApplicationConfigKeys.LOG_PREFIX)) {
+//                    String value = (String) sApplicationProp.get(keys[i]);
+//                    String[] keyElement = StringUtil.split(keys[i], "\\.");
+//                    if (keyMap.get(keyElement[1]) == null) {
+//                        Map<String, String> logMap = new HashMap<String, String>();
+//                        logMaps.put(keyElement[1], logMap);
+//                        keyMap.put(keyElement[1], "");
+//                    }
+//                    Map<String, String> logMap = logMaps.get(keyElement[1]);
+//                    logMap.put(createKey(keyElement, 2, "."), StringUtil.trim(value));
+//                }
+//
+//            }
+//
+//            String[] configArray = keyMap.keySet().toArray(new String[keyMap.size()]);
+//            for (int i = 0; i < configArray.length; i++) {
+//                if (configArray[i].equals(ApplicationConfigKeys.LOG_CATEGORY_KEY)) {
+//                    continue;
+//                }
+//                LogConfig config = new LogConfig(configArray[i], logMaps.get(configArray[i]));
+//                result.put(configArray[i], config);
+//            }
+//        }
+//        return result;
+//    }
 }
