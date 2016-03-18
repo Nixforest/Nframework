@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Map;
 
 import nixforest.cpn.nframework.commons.analysis.SWatch;
-import nixforest.cpn.nframework.commons.config.AppConfigKeys;
+import nixforest.cpn.nframework.commons.config.ConfigKeys;
 import nixforest.cpn.nframework.commons.exception.BaseConfigException;
 import nixforest.cpn.nframework.commons.exception.GenericRuntimeException;
 import nixforest.cpn.nframework.commons.util.DateTimeUtil;
@@ -46,22 +46,22 @@ public class LogConfig {
         // Appender name
         mAppenderName = name;
         // Class path of appender
-        mAppenderClass = config.get(AppConfigKeys.LOG_APPENDER_CLASS_KEY);
+        mAppenderClass = config.get(ConfigKeys.LOG_APPENDER_CLASS_KEY);
         // Output type
         String type =
-                StringUtil.nullToString(config.get(AppConfigKeys.LOG_OUTPUT_TYPE_KEY), "0");
+                StringUtil.nullToString(config.get(ConfigKeys.LOG_OUTPUT_TYPE_KEY), "0");
         mType = Integer.parseInt(type);
         // Output directory
         mDirectory =
-                StringUtil.nullToEmpty(config.get(AppConfigKeys.LOG_OUTPUT_DIRECOTRY_KEY));
+                StringUtil.nullToEmpty(config.get(ConfigKeys.LOG_OUTPUT_DIRECOTRY_KEY));
         // Output filename
         mFileName =
-                StringUtil.nullToEmpty(config.get(AppConfigKeys.LOG_OUTPUT_FILENAME_KEY));
+                StringUtil.nullToEmpty(config.get(ConfigKeys.LOG_OUTPUT_FILENAME_KEY));
 
         // Daily rotation decision
         String rotate =
                 StringUtil.nullToString(
-                        config.get(AppConfigKeys.LOG_OUTPUT_ROTATE_DAILY_KEY), "no");
+                        config.get(ConfigKeys.LOG_OUTPUT_ROTATE_DAILY_KEY), "no");
         if (rotate.equals("yes")) {
             mRotDaily = true;
         } else {
@@ -71,26 +71,26 @@ public class LogConfig {
         // Log rotation settings: the maximum file size (0: not determined, byte)
         String size =
                 StringUtil.nullToString(
-                        config.get(AppConfigKeys.LOG_OUTPUT_MAX_FILE_SIZE_KEY), "0");
+                        config.get(ConfigKeys.LOG_OUTPUT_MAX_FILE_SIZE_KEY), "0");
         mMaxFileSize = Long.parseLong(size);
         // The maximum number of backup files
         String idx =
                 StringUtil.nullToString(
-                        config.get(AppConfigKeys.LOG_OUTPUT_MAX_BACKUP_INDEX_KEY), "-1");
+                        config.get(ConfigKeys.LOG_OUTPUT_MAX_BACKUP_INDEX_KEY), "-1");
         mMaxBackupIndex = Integer.parseInt(idx);
         //TODO-AssertUtil.assertTrue(mMaxBackupIndex != 0, "MaxBackupIndex must be other than '0'.");
         
         // Date format to be added to the log file
         mFileDateFormat =
                 StringUtil.nullToEmpty(
-                        config.get(AppConfigKeys.LOG_OUTPUT_FILE_DATE_FORMAT_KEY));
+                        config.get(ConfigKeys.LOG_OUTPUT_FILE_DATE_FORMAT_KEY));
 
         // Class path of the log layout
-        mLogFormatClass = config.get(AppConfigKeys.LOG_LAYOUT_CLASS_KEY);
+        mLogFormatClass = config.get(ConfigKeys.LOG_LAYOUT_CLASS_KEY);
         // Layout conversion pattern
-        mConversionPattern = config.get(AppConfigKeys.LOG_LAYOUT_CONVERSION_PATTERN_KEY);
+        mConversionPattern = config.get(ConfigKeys.LOG_LAYOUT_CONVERSION_PATTERN_KEY);
         // ログ中の日付フォーマット
-        mDateFormat = config.get(AppConfigKeys.LOG_LAYOUT_DATE_FORMAT_KEY);
+        mDateFormat = config.get(ConfigKeys.LOG_LAYOUT_DATE_FORMAT_KEY);
 
         // Date format in the log
         mLogFormat = createLogFormatInst();
@@ -206,7 +206,7 @@ public class LogConfig {
 	/**
 	 * @param mOutputFile the mOutputFile to set
 	 */
-	public void setmOutputFile(File file) {
+	public void setOutputFile(File file) {
 		//TODO-AssertUtil.assertNotNull(file, "outputFile");
 		this.mOutputFile = file;
 	}
@@ -221,7 +221,7 @@ public class LogConfig {
 	/**
 	 * @param mOutputFilePath the mOutputFilePath to set
 	 */
-	public void setmOutputFilePath(String filePath) {
+	public void setOutputFilePath(String filePath) {
 		//TODO-AssertUtil.assertNotEmpty(filePath, "outputFilePath");
 		this.mOutputFilePath = filePath;
 	}

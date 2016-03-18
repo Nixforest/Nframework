@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import nixforest.cpn.nframework.commons.exception.BaseConfigException;
+import nixforest.cpn.nframework.commons.logger.LogConfig;
+import nixforest.cpn.nframework.commons.logger.LogLevel;
 import nixforest.cpn.nframework.commons.util.StringUtil;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -112,10 +114,10 @@ public final class ConfigMan {
     static Properties getApplicationProperties() {
         return sApplicationProp;
     }
-    //TODO-static Map<String, LogConfig> getLogConfigMap() {
-//        String[] keys =
-//                (String[]) sApplicationProp.keySet().toArray(new String[sApplicationProp.size()]);
-//        Map<String, LogConfig> result = new HashMap<String, LogConfig>();
+    static Map<String, LogConfig> getLogConfigMap() {
+        String[] keys =
+                (String[]) sApplicationProp.keySet().toArray(new String[sApplicationProp.size()]);
+        Map<String, LogConfig> result = new HashMap<String, LogConfig>();
 //        if (keys != null && keys.length > 0) {
 //            Arrays.sort(keys);
 //            Map<String, String> keyMap = new HashMap<String, String>();
@@ -144,6 +146,47 @@ public final class ConfigMan {
 //                result.put(configArray[i], config);
 //            }
 //        }
-//        return result;
-//    }
+        return result;
+    }
+    static Map<String, LogLevel> getLogCategoryMap() {
+        String[] keys =
+                (String[]) sApplicationProp.keySet().toArray(new String[sApplicationProp.size()]);
+        Map<String, LogLevel> result = new HashMap<String, LogLevel>();
+//        if (keys != null && keys.length > 0) {
+//            Arrays.sort(keys);
+//            for (int i = 0; i < keys.length; i++) {
+//                if (keys[i].startsWith(ApplicationConfigKeys.LOG_PREFIX)) {
+//                    String value = (String) sApplicationProp.get(keys[i]);
+//                    String[] keyElement = StringUtil.split(keys[i], "\\.");
+//                    if (keyElement[1].equals(ApplicationConfigKeys.LOG_CATEGORY_KEY)
+//                            && !keyElement[2].equals(ApplicationConfigKeys.LOG_CATEGORY_ROOT_KEY)) {
+//                        LogLevel level = LogLevel.parse(StringUtil.trim(value));
+//                        result.put(createKey(keyElement, 2, "."), level);
+//                    }
+//                }
+//            }
+//        }
+        return result;
+    }
+    static LogLevel getLogRootCategory() {
+        String[] keys =
+                (String[]) sApplicationProp.keySet().toArray(new String[sApplicationProp.size()]);
+        LogLevel level = null;
+        if (keys != null && keys.length > 0) {
+            Arrays.sort(keys);
+            for (int i = 0; i < keys.length; i++) {
+//                if (keys[i].startsWith(ApplicationConfigKeys.LOG_PREFIX)) {
+//                    String value = (String) sApplicationProp.get(keys[i]);
+//                    String[] keyElement = StringUtil.split(keys[i], "\\.");
+//                    if (keyElement[1].equals(ApplicationConfigKeys.LOG_CATEGORY_KEY)
+//                            && keyElement[2].equals(ApplicationConfigKeys.LOG_CATEGORY_ROOT_KEY)) {
+//                        // ルートカテゴリ
+//                        level = LogLevel.parse(StringUtil.trim(value));
+//                        break;
+//                    }
+//                }
+            }
+        }
+        return level;
+    }
 }

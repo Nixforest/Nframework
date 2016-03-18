@@ -7,7 +7,7 @@ package nixforest.cpn.nframework.commons.config;
  * @author Nixforest
  * @date Mar 05, 2016
  */
-public final class AppConfigKeys {
+public final class ConfigKeys {
     public static final String LOG_PREFIX                         = "log";
     public static final String LOG_CATEGORY_KEY                   = "category";
     public static final String LOG_CATEGORY_ROOT_KEY              = "root";
@@ -73,9 +73,19 @@ public final class AppConfigKeys {
     public static final String VIEW_FIXED_FONT_UNIT               = "view.fixed.font.unit";
     public static final String VIEW_ERROR_EDIT_FONT_COLOR         = "view.error.edit.font.color";
 
+    /** SystemConfigKeys */
+    public static final String DEBUG_MODE                 = "debug.mode";
+    public static final String VALID_METHOD_FLG           = "valid.method.flg";
+    public static final String APPLICATION_ENCODING       = "application.encoding";
+    public static final String FIXED_LOCALE               = "locale.fix";
+    public static final String FIXED_LOCALE_COUNTRY       = "locale.country";
+    public static final String FIXED_LOCALE_LANGUAGE      = "locale.language";
+    public static final String UNCAUGHT_EXCEPTION_HANDLER = "class.handler.uncaughtExceptionHandler";
+    public static final String VALIDATOR_TEXT_CHECKER     = "class.validator.textValidator";
+    public static final String VALIDATOR_BEHAVIOR         = "class.validator.behavior";
     /**
      * Default constructor.
      */
-    private AppConfigKeys() {
+    private ConfigKeys() {
     }
 }
